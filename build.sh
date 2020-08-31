@@ -8,6 +8,7 @@ echo "Cleaning output directory."
 rm -rf $OUTPUT_DIR/dist
 
 echo "Running : antora $PLAYBOOK"
+cd /apicurio-docs-playbook
 antora $PLAYBOOK
 echo "Antora build completed successfully."
 
