@@ -19,7 +19,7 @@ To build the docker image, do this:
 
 ```docker build -t="apicurio/apicurio-docs-builder" --rm .```
 
-Then you can push the new image like this:
+Then you can push the new image like this (maintainers only):
 
 ```docker push apicurio/apicurio-docs-builder:latest```
 
@@ -28,19 +28,18 @@ process.  See the `build.sh` file for details about how Antora is used to build 
 
 ## Building the Documentation
 
-The Docker image should be used to build the documentation.  It has several (optional) inputs
-and one required volume-mount to store the output.  You can run the build something like this:
+The Docker image should be used to build the documentation.  It simply has one required 
+volume-mount to read the playbook and store the output.  You can run the build something 
+like this:
 
 ```
 docker pull apicurio/apicurio-docs-builder:latest
-docker run '-v=C:\Users\ewittman\git\apicurio\apicurio.github.io\registry\docs:/antora-dist' -it apicurio/apicurio-docs-builder:latest
+docker run -v $(pwd):/apicurio-docs-playbook -it apicurio/apicurio-docs-builder:latest
 ```
 
 This will run the build and output the result in the provided local directory (in the above
 example it would write the result to the appropriate Apicurio project site directory).
 
-The following ENV variables can be set to customize what gets built:
+The following ENV variables can be set when running the docker image:
 
-* **ENV PLAYBOOK** local-antora-playbook.yml
-
-Feel free to override the default values to customize the build.
+* **ENV PLAYBOOK** registry-docs-playbook.yml
