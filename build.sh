@@ -1,6 +1,8 @@
 #!/bin/sh
 
-OUTPUT_DIR=/apicurio-docs-playbook/target/
+OUTPUT_DIR=/apicurio-docs-playbook/target
+
+mkdir -p $OUTPUT_DIR
 
 echo "Cleaning output directory."
 rm -rf $OUTPUT_DIR/dist
