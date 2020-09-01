@@ -5,7 +5,7 @@ OUTPUT_DIR=/apicurio-docs-playbook/target
 mkdir -p $OUTPUT_DIR
 
 echo "Cleaning output directory."
-rm -rf $OUTPUT_DIR/dist
+rm -rf $OUTPUT_DIR/*
 
 echo "Running : antora $PLAYBOOK"
 cd /apicurio-docs-playbook
