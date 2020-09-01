@@ -16,6 +16,9 @@ ui:
     snapshot: true
   output_dir: assets
 
+runtime:
+  cache_dir: ./target/antora-cache
+
 output:
   dir: ./target/dist
 
