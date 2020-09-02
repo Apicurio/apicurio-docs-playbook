@@ -34,7 +34,7 @@ like this:
 
 ```
 docker pull apicurio/apicurio-docs-builder:latest
-docker run -v $(pwd):/apicurio-docs-playbook -it apicurio/apicurio-docs-builder:latest
+docker run -v $(pwd):/apicurio-docs-playbook apicurio/apicurio-docs-builder:latest
 ```
 
 This will run the build and output the result in the provided local directory (in the above
