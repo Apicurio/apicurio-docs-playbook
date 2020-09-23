@@ -1,14 +1,16 @@
 #!/bin/sh
 
-OUTPUT_DIR=/apicurio-docs-playbook/target
+#BASE_DIR=
+#PLAYBOOK=
+OUTPUT_DIR=$BASE_DIR/target
 
 mkdir -p $OUTPUT_DIR
 
-echo "Cleaning output directory."
+echo "Cleaning output directory: $OUTPUT_DIR"
 rm -rf $OUTPUT_DIR/*
 
-echo "Running : antora $PLAYBOOK"
-cd /apicurio-docs-playbook
+echo "Running : antora $PLAYBOOK from $BASE_DIR"
+cd $BASE_DIR
 antora $PLAYBOOK
 echo "Antora build completed successfully."
 

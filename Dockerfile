@@ -3,6 +3,7 @@
 # winpty docker run '-v=C:\Users\ewittman\git\apicurio\apicurio.github.io\registry\docs:/antora-dist' --env GIT_REPO=https://github.com/EricWittmann/apicurio-registry.git --env GIT_BRANCH=antora -it apicurio/apicurio-docs-builder
 FROM centos:8
 
+ENV BASE_DIR=/apicurio-docs-playbook
 ENV PLAYBOOK registry-docs-playbook.yml
 
 VOLUME /apicurio-docs-playbook
