@@ -16,6 +16,8 @@ echo "Antora build completed successfully."
 
 echo "Customizing output."
 find $OUTPUT_DIR/dist -name '*.html' -exec sed -i 's/_images/assets-images/g' {} \;
+find $OUTPUT_DIR/dist -name '*.html' -exec sed -i 's/_attachments/assets-attachments/g' {} \;
 find $OUTPUT_DIR/dist -name '_images' -execdir mv _images assets-images \;
+find $OUTPUT_DIR/dist -name '_attachments' -execdir mv _attachments assets-attachments \;
 
 echo "Done."
