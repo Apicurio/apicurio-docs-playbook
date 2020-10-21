@@ -1,0 +1,50 @@
+name: Release Workflow
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to build docs from'
+        required: true
+        default: 'master'
+jobs:
+  publish:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Apicurio Website Checkout
+        run: |
+          mkdir website
+          cd website
+          git init
+          git config --global user.name "apicurio-ci"
+          git config --global user.email "apicurio.ci@gmail.com"
+          git remote add origin "https://apicurio-ci:${{ secrets.ACCESS_TOKEN }}@github.com/Apicurio/apicurio.github.io.git"
+          git fetch
+          git checkout master
+          git branch --set-upstream-to=origin/master
+          git pull
+      - name: Apicurio Playbook Checkout
+        run: |
+          mkdir docs-playbook
+          cd docs-playbook
+          git init
+          git config --global user.name "apicurio-ci"
+          git config --global user.email "apicurio.ci@gmail.com"
+          git remote add origin "https://apicurio-ci:${{ secrets.ACCESS_TOKEN }}@github.com/Apicurio/apicurio-docs-playbook.git"
+          git fetch
+          git checkout master
+          git branch --set-upstream-to=origin/${{ github.event.inputs.branch }}
+          git pull
+      - name: Generate Project Documentation for Website
+        run: |
+          echo "********** Building Registry Documentation using Antora **********"
+          cd docs-playbook
+          docker pull apicurio/apicurio-docs-builder:latest
+          docker run -v $(pwd):/apicurio-docs-playbook apicurio/apicurio-docs-builder:latest
+          rm -rf ../website/registry/docs/*
+          cp -rf target/dist/* ../website/registry/docs/.
+      - name: Commit Project Website Changes
+        run: |
+          cd website
+          git add .
+          git commit -m "Automated update of Apicurio Registry documentation"
+          git push
