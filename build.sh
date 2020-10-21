@@ -2,6 +2,17 @@
 
 #BASE_DIR=
 #PLAYBOOK=
+
+if [ "x$BASE_DIR" = "x" ]
+then
+  BASE_DIR=`pwd`
+fi
+
+if [ "x$PLAYBOOK" = "x" ]
+then
+  PLAYBOOK=registry-docs-playbook.yml
+fi
+
 OUTPUT_DIR=$BASE_DIR/target
 
 mkdir -p $OUTPUT_DIR
