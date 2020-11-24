@@ -9,6 +9,10 @@ content:
     branches: 1.3.x
     start_path: docs
     edit_url: '{web_url}'
+  - url: git@github.com:Apicurio/apicurio-registry-operator.git
+    branches: master
+    tags: 0.0.4
+    start_path: docs
 
 ui:
   bundle:
