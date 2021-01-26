@@ -1,0 +1,58 @@
+[build]
+publish = "public"
+ignore = "false"
+
+[build.environment]
+CI = "true"
+NODE_VERSION = "12"
+# WARNING netlify-build ignores NPM_FLAGS when installing plugins, so use low-level NPM_CONFIG_ flag instead
+#NPM_FLAGS = "--no-optional"
+NPM_CONFIG_OPTIONAL = "false"
+ANTORA_CACHE_DIR = "node_modules/.cache/antora"
+
+# NOTE the --fetch flag is needed on both calls to update both the content and UI bundle (since the xref validator doesn't fetch the UI)
+
+[context.production]
+command = """\
+node_modules/.bin/antora --fetch --generator=@antora/xref-validator ..registry-docs-playbook.yml && \
+node_modules/.bin/antora --fetch --html-url-extension-style=indexify --redirect-facility=netlify --to-dir=public ..registry-docs-playbook.yml && \
+sed -i 's; 301$;&!;' public/_redirects && \
+curl -s -X POST -F "token=$INDEX_WEBHOOK_TOKEN" -F "ref=$BRANCH" -F "variables[TRIGGER_ACTION]=index" $INDEX_WEBHOOK_URL | \
+grep -oPq '"web_url":"[^"]+pipelines[^"]+"'\
+"""
+
+[context.production.environment]
+ALGOLIA_APP_ID = "SH1O92EXWU"
+ALGOLIA_API_KEY = "955edff5e9da4eeb78cab46c1f00d681"
+ALGOLIA_IDX_NAME = "apicurio-docs"
+# GOOGLE_ANALYTICS_KEY = ""
+
+[context.deploy-preview]
+command = """\
+node_modules/.bin/antora --fetch --generator=@antora/xref-validator ../registry-docs-playbook.yml && \
+node_modules/.bin/antora --fetch --html-url-extension-style=indexify --redirect-facility=netlify --to-dir=public --url $DEPLOY_PRIME_URL ..registry-docs-playbook.yml && \
+sed -i 's; 301$;&!;' public/_redirects\
+"""
+
+[[plugins]]
+package = "netlify-plugin-checklinks"
+
+[plugins.inputs]
+entryPoints = ["**/*.html"]
+recursive = true
+pretty = true
+# the leading space in the skipPattern is significant
+skipPatterns = [" public/index.html"]
+todoPatterns = []
+checkExternal = false
+followSourceMaps = false
+
+[[headers]]
+for = "/_/font/*"
+  [headers.values]
+  Cache-Control = "public,max-age=604800"
+
+# ...or define headers in _headers file to allow use of netlify command (not currently used)
+# /_/font/*
+#  Cache-Control: public,max-age=604800
+
