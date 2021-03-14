@@ -1,7 +1,7 @@
 site:
   title: Apicurio Registry
   # the 404 page and sitemap files only get generated when the url property is set
-  url: https://www.apicur.io/registry/docs
+  url: http://127.0.0.1:8080/
   start_page: apicurio-registry::index.adoc
 content:
   sources:
@@ -15,6 +15,7 @@ ui:
     url: https://raw.githubusercontent.com/Apicurio/apicurio-docs-ui/master/dist/ui-bundle.zip
     snapshot: true
   output_dir: assets
+  supplemental_files: ./supplemental_ui
 
 runtime:
   cache_dir: ./target/antora-cache

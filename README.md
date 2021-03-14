@@ -43,3 +43,10 @@ example it would write the result to the appropriate Apicurio project site direc
 The following ENV variables can be set when running the docker image:
 
 * **ENV PLAYBOOK** registry-docs-playbook.yml
+
+
+The following adds a search index:
+
+```
+$ DOCSEARCH_ENABLED=true DOCSEARCH_ENGINE=lunr NODE_PATH="$(npm -g root)" antora --generator antora-site-generator-lunr registry-docs-playbook.yml
+````
