@@ -11,7 +11,7 @@ VOLUME /apicurio-docs-playbook
 RUN yum update -y && \
     yum install -y git &&  \
     yum install -y nodejs && \
-    npm i -g antora-lunr @antora/cli@2.3 @antora/site-generator-default@2.3
+    npm i -g antora-site-generator-lunr antora-lunr @antora/cli@2.3 @antora/site-generator-default@2.3
 
 ADD build.sh build.sh
 
