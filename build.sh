@@ -22,7 +22,7 @@ rm -rf $OUTPUT_DIR/*
 
 echo "Running : antora $PLAYBOOK from $BASE_DIR"
 cd $BASE_DIR
-antora $PLAYBOOK
+DOCSEARCH_ENABLED=true DOCSEARCH_ENGINE=lunr NODE_PATH="$(npm -g root)" antora --generator antora-site-generator-lunr $PLAYBOOK
 echo "Antora build completed successfully."
 
 echo "Customizing output."

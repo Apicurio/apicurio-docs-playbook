@@ -15,6 +15,7 @@ ui:
     url: https://raw.githubusercontent.com/Apicurio/apicurio-docs-ui/master/dist/ui-bundle.zip
     snapshot: true
   output_dir: assets
+  supplemental_files: ./supplemental_ui
 
 runtime:
   cache_dir: ./target/antora-cache
