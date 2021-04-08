@@ -7,7 +7,24 @@ some issues with building on various platforms (I'm looking at you, Windows) and
 conflicts between what Antora builds and what our GitHub Pages (jekyll) project site expects,
 we have created a non-trivial (but automated) process for building the docs.
 
-## Docker Image
+# Building the Documentation Locally
+
+To locally build the documentation, there is a simple bash script called `build.sh` that
+can be run.  This script runs the `antora` tool which is responsible for building the HTML
+documentation from the Apicurio Registry asciidoc sources.  The `antora` tool is a node
+application, so you will need `node` and `npm` installed.
+
+Once you have `node` installed, run the following commands:
+
+```
+npm install
+./build.sh
+```
+
+When this completes, the generated documentation will exist in the `./target/dist` 
+output directory.
+
+# Building the Documentation using Docker
 
 In order to avoid platform inconsistencies with the build, we have created a Docker image to
 perform it.  The `Dockerfile` is located in this directory, along with a `build.sh` script
