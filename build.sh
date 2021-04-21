@@ -11,8 +11,13 @@ fi
 if [ "x$PLAYBOOK" = "x" ]
 then
   PLAYBOOK=registry-docs-playbook.yml
+fi
+
+if [ "x$SEARCH_PLAYBOOK" = "x" ]
+then
   SEARCH_PLAYBOOK=registry-search-playbook.yml
 fi
+
 
 OUTPUT_DIR=$BASE_DIR/target
 

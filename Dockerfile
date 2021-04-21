@@ -5,6 +5,7 @@ FROM centos:8
 
 ENV BASE_DIR=/apicurio-docs-playbook
 ENV PLAYBOOK registry-docs-playbook.yml
+ENV SEARCH_PLAYBOOK registry-search-playbook.yml
 
 VOLUME /apicurio-docs-playbook
 
