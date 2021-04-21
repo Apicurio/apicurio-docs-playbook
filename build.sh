@@ -11,6 +11,7 @@ fi
 if [ "x$PLAYBOOK" = "x" ]
 then
   PLAYBOOK=registry-docs-playbook.yml
+  SEARCH_PLAYBOOK=registry-search-playbook.yml
 fi
 
 OUTPUT_DIR=$BASE_DIR/target
@@ -28,6 +29,14 @@ export DOCSEARCH_ENABLED=true
 export DOCSEARCH_ENGINE=lunr
 export NODE_PATH="$(npm -g root)"
 
+# create search index on subset of titles and stash it
+antora --generator antora-site-generator-lunr $SEARCH_PLAYBOOK
+cp $OUTPUT_DIR/dist/search-index.js /tmp
+
+# clean output directory to prep for final antora run
+rm -rf $OUTPUT_DIR/dist
+
+# create final set of docs
 antora --generator antora-site-generator-lunr $PLAYBOOK
 echo "Antora build completed successfully."
 
@@ -38,3 +47,6 @@ find $OUTPUT_DIR/dist -name '_images' -execdir mv _images assets-images \;
 find $OUTPUT_DIR/dist -name '_attachments' -execdir mv _attachments assets-attachments \;
 
 echo "Done."
+
+# restore stashed search index
+cp -rf /tmp/search-index.js $OUTPUT_DIR/dist
