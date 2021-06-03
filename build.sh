@@ -35,13 +35,15 @@ export DOCSEARCH_ENGINE=lunr
 export NODE_PATH="$(npm -g root)"
 
 # create search index on subset of titles and stash it
+echo "Building antora search index..."
 antora --generator antora-site-generator-lunr $SEARCH_PLAYBOOK
 cp $OUTPUT_DIR/dist/search-index.js /tmp
 
 # clean output directory to prep for final antora run
-rm -rf $OUTPUT_DIR/dist
+rm -rf $OUTPUT_DIR/*
 
 # create final set of docs
+echo "Building antora docs..."
 antora --generator antora-site-generator-lunr $PLAYBOOK
 echo "Antora build completed successfully."
 
