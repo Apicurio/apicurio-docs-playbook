@@ -40,3 +40,4 @@ asciidoc:
     installing-the-registry-openshift: link:assembly-installing-registry-openshift.html[Installing Apicurio Registry on OpenShift]
     installing-the-registry-storage-openshift: link:assembly-installing-registry-storage-openshift.html[Installing Apicurio Registry storage on OpenShift]
     kafka-client-serdes: link:assembly-using-kafka-client-serdes.html[Validating schemas using Kafka client serializers/deserializers in Java]
+    rest-client:  link:assembly-using-the-registry-client.html[Managing Apicurio Registry content using a Java client]
