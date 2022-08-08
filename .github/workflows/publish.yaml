@@ -5,7 +5,7 @@ on:
       branch:
         description: 'Branch to build docs from'
         required: true
-        default: 'master'
+        default: 'main'
 jobs:
   publish:
     runs-on: ubuntu-18.04
@@ -19,8 +19,8 @@ jobs:
           git config --global user.email "apicurio.ci@gmail.com"
           git remote add origin "https://apicurio-ci:${{ secrets.ACCESS_TOKEN }}@github.com/Apicurio/apicurio.github.io.git"
           git fetch
-          git checkout master
-          git branch --set-upstream-to=origin/master
+          git checkout main
+          git branch --set-upstream-to=origin/main
           git pull
       - name: Apicurio Playbook Checkout
         run: |
@@ -31,7 +31,7 @@ jobs:
           git config --global user.email "apicurio.ci@gmail.com"
           git remote add origin "https://apicurio-ci:${{ secrets.ACCESS_TOKEN }}@github.com/Apicurio/apicurio-docs-playbook.git"
           git fetch
-          git checkout master
+          git checkout main
           git branch --set-upstream-to=origin/${{ github.event.inputs.branch }}
           git pull
       - name: Generate Project Documentation for Website
