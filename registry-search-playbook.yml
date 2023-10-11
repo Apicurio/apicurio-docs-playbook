@@ -6,7 +6,7 @@ site:
 content:
   sources:
   - url: https://github.com/Apicurio/apicurio-registry.git
-    branches: main
+    branches: 2.4.x
     start_path: docs
     edit_url: '{web_url}'
   - url: https://github.com/Apicurio/apicurio-registry-operator.git
