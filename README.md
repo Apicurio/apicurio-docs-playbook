@@ -1,3 +1,10 @@
+# REPOSITORY ARCHIVED
+
+The content of this repository have moved here:
+
+https://github.com/Apicurio/apicurio-registry/tree/main/docs-playbook
+
+
 # Antora Build for Apicurio Registry Documentation
 
 This folder contains the configuration and scripts used when building the Apicurio Registry 
